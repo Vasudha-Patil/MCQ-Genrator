@@ -1,0 +1,72 @@
+## MCQ 1
+Question: Prolog is primarily used for:
+A) Web development
+B) Logic programming and Artificial Intelligence
+C) Mobile app development
+D) Game development
+Correct Answer: B
+
+## MCQ 2
+Question: Which of the following is NOT a Prolog environment?
+A) SWI-Prolog
+B) GNU Prolog
+C) PyCharm
+D) ECLiPSe
+Correct Answer: C
+
+## MCQ 3
+Question:  What is the correct file extension for Prolog files?
+A) .py
+B) .pl
+C) .java
+D) .cpp
+Correct Answer: B
+
+## MCQ 4
+Question: The statement `cat(tom).` in Prolog represents a:
+A) Rule
+B) Query
+C) Fact
+D) Variable
+Correct Answer: C
+
+
+## MCQ 5 (Fill in the blank)
+Question: In Prolog, the symbol `:-`  means "_______".
+A) and
+B) or
+C) if
+D) not
+Correct Answer: C
+
+## MCQ 6 (Match the pairs)
+Question: Match the Prolog terms with their descriptions:
+
+| Term        | Description                               |
+|-------------|-------------------------------------------|
+| 1. Fact     | a. Conditional statement                  |
+| 2. Rule      | b. Asks Prolog questions                |
+| 3. Query     | c. Basic assertion about the world         |
+
+A) 1-a, 2-b, 3-c
+B) 1-c, 2-a, 3-b
+C) 1-b, 2-c, 3-a
+D) 1-c, 2-b, 3-a
+Correct Answer: B
+
+
+## MCQ 7
+Question:  Prolog uses which mechanism to find solutions by trying different possibilities?
+A) Recursion
+B) Iteration
+C) Backtracking
+D) Branching
+Correct Answer: C
+
+## MCQ 8 (Fill in the blank)
+Question: To load a Prolog file named "example.pl" in SWI-Prolog, you would use the command `?- _______.`
+A) load(example.pl)
+B) [example.pl]
+C) consult(example.pl)
+D) include(example.pl)
+Correct Answer: B

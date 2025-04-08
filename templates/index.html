@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCQ Generator</title>
+    <style>
+        /* General body styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Container styles */
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Header styles */
+        .main-header {
+            text-align: center;
+            color: #4b6cb7;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+
+        /* Form styles */
+        .upload-form {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .form-label {
+            font-size: 1.2rem;
+            color: #333333;
+            margin-bottom: 8px;
+        }
+
+        .input-field, .file-input, .submit-btn {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        /* Buttons */
+        .submit-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+
+        /* Select box */
+        .input-field select {
+            padding: 12px;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+            }
+
+            .main-header {
+                font-size: 2rem;
+            }
+
+            .form-label, .input-field, .submit-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Index Page -->
+    <div class="container">
+        <h1 class="main-header">Upload File and Generate MCQs</h1>
+        <form action="/generate" method="POST" enctype="multipart/form-data" class="upload-form">
+            <!-- File input section -->
+            <label for="file" class="form-label">Upload a file (PDF, DOCX, TXT):</label>
+            <input type="file" name="file" id="file" required class="file-input"><br><br>
+
+            <!-- Number of Questions -->
+            <label for="num_questions" class="form-label">Number of Questions:</label>
+            <input type="number" name="num_questions" id="num_questions" min="1" required class="input-field"><br><br>
+
+            <!-- Difficulty Level -->
+            <label for="difficulty" class="form-label">Select Difficulty:</label>
+            <select name="difficulty" id="difficulty" required class="input-field">
+                <option value="simple">Simple</option>
+                <option value="medium">Medium</option>
+                <option value="advanced">Advanced</option>
+            </select><br><br>
+
+            <!-- Submit Button -->
+            <button type="submit" class="submit-btn">Generate MCQs</button>
+        </form>
+    </div>
+
+</body>
+</html>

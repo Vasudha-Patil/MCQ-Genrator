@@ -1,0 +1,56 @@
+## MCQ 1
+Question: Which type of AI is currently hypothetical and represents the highest level of machine intelligence, exceeding human capabilities in all cognitive aspects?
+A) Narrow AI
+B) General AI
+C) Super AI
+D) Reactive Machines
+Correct Answer: C
+
+## MCQ 2
+Question: Match the AI agent type with its characteristic:
+
+| Agent Type | Characteristic |
+|---|---|
+| 1. Simple Reflex Agent | a. Uses a utility function to evaluate actions |
+| 2. Model-Based Agent | b. Acts based on current percept only |
+| 3. Goal-Based Agent | c. Maintains an internal state and model of the world |
+| 4. Utility-Based Agent | d. Chooses actions to achieve a specific goal |
+
+
+A) 1-b, 2-c, 3-d, 4-a
+B) 1-a, 2-b, 3-c, 4-d
+C) 1-c, 2-d, 3-a, 4-b
+D) 1-d, 2-a, 3-b, 4-c
+Correct Answer: A
+
+## MCQ 3
+Question:  Fill in the blank:  _______ reasoning starts with a general statement and examines the possibilities to reach a specific, logical conclusion.
+A) Inductive
+B) Abductive
+C) Deductive
+D) Conductive
+Correct Answer: C
+
+## MCQ 4
+Question:  Which component of an intelligent agent is responsible for suggesting actions that lead to new and informative experiences?
+A) Learning element
+B) Critic
+C) Performance element
+D) Problem generator
+Correct Answer: D
+
+## MCQ 5
+Question:  What does the acronym PEAS stand for in the context of defining the problem an AI agent solves?
+A) Performance, Environment, Actuators, Sensors
+B) Perception, Exploration, Adaptation, Search
+C) Planning, Execution, Analysis, Simulation
+D) Problem, Example, Algorithm, Solution
+Correct Answer: A
+
+## MCQ 6
+Question: Which historical figure is credited with devising the Turing test, a significant benchmark in evaluating machine intelligence?
+A) John Von Neumann
+B) Alan Turing
+C) Charles Babbage
+D) Warren McCulloch
+Correct Answer: B

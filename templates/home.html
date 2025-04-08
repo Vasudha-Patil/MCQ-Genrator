@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto-Transforming Question Generator</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f5f7fa;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            overflow-x: hidden;
+        }
+        
+        .demo-container {
+            width: 100%;
+            max-width: 800px;
+        }
+        
+        .panel {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.5s;
+        }
+        
+        h1 {
+            color: #6C63FF;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .source-text {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            min-height: 120px;
+        }
+        
+        .word {
+            display: inline-block;
+            margin: 2px;
+            position: relative;
+        }
+        
+        .word.highlight {
+            background: rgba(108, 99, 255, 0.15);
+            border-radius: 4px;
+            padding: 0 4px;
+        }
+        
+        .word.animating {
+            position: absolute;
+            z-index: 100;
+            animation: var(--effect) 1.2s forwards;
+            color: var(--color);
+        }
+        
+        /* Animation Effects */
+        @keyframes fly {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(1.8); opacity: 0; }
+        }
+        
+        @keyframes spiral {
+            0% { transform: translate(0, 0) rotate(0deg) scale(1); opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)) rotate(720deg) scale(1.5); opacity: 0; }
+        }
+        
+        @keyframes wave {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            50% { transform: translate(calc(var(--tx) * 0.5), calc(var(--ty) * 0.5 + 20px)) scale(1.3); }
+            100% { transform: translate(var(--tx), var(--ty)) scale(1.8); opacity: 0; }
+        }
+        
+        .question-paper {
+            min-height: 300px;
+            background: #fff;
+            border-left: 4px solid #6C63FF;
+        }
+        
+        .question {
+            padding: 1rem;
+            border-bottom: 1px dashed #eee;
+            animation: fadeIn 0.5s forwards;
+            opacity: 0;
+        }
+        
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        
+        .progress-container {
+            width: 100%;
+            height: 6px;
+            background: #e0e0e0;
+            border-radius: 3px;
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, #6C63FF, #FF6584);
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+        .stage-indicator {
+            text-align: center;
+            color: #6C63FF;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <h1>Auto-Generating Question Paper</h1>
+        
+        <div class="stage-indicator" id="stageIndicator">Stage 1: Basic Concepts</div>
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        
+        <div class="panel">
+            <h2>Source Text Evolution</h2>
+            <div class="source-text" id="sourceText"></div>
+        </div>
+        
+        <div class="panel question-paper">
+            <h2>Generated Questions</h2>
+            <div id="questionsContainer"></div>
+        </div>
+    </div>
+
+    <script>
+        // Demo content with increasing complexity
+        const stages = [
+            {
+                title: "Stage 1: Basic Concepts",
+                text: `<span class="word highlight">Photosynthesis</span> is the process plants use to convert <span class="word highlight">sunlight</span> into energy.`,
+                questions: [
+                    "What is the primary purpose of photosynthesis?",
+                    "What energy source do plants use for photosynthesis?"
+                ]
+            },
+            {
+                title: "Stage 2: Chemical Process",
+                text: `During <span class="word highlight">photosynthesis</span>, plants absorb <span class="word highlight">carbon dioxide</span> and release <span class="word highlight">oxygen</span> while producing <span class="word highlight">glucose</span>.`,
+                questions: [
+                    "What gas do plants absorb during photosynthesis?",
+                    "What two main products result from photosynthesis?",
+                    "What sugar is produced by photosynthesis?"
+                ]
+            },
+            {
+                title: "Stage 3: Full Equation",
+                text: `The complete <span class="word highlight">photosynthesis</span> equation: 6CO₂ + 6H₂O + light → C₆H₁₂O₆ + 6O₂. <span class="word highlight">Chlorophyll</span> in <span class="word highlight">chloroplasts</span> captures <span class="word highlight">light energy</span>.`,
+                questions: [
+                    "Write the balanced photosynthesis equation",
+                    "Which pigment captures light for photosynthesis?",
+                    "Where in plant cells does photosynthesis occur?",
+                    "How many water molecules are needed per glucose molecule?"
+                ]
+            }
+        ];
+        
+        const effects = ["fly", "spiral", "wave"];
+        const colors = ["#6C63FF", "#FF6584", "#42C2FF", "#2ECC71", "#F39C12"];
+        
+        let currentStage = 0;
+        const progressBar = document.getElementById('progressBar');
+        const stageIndicator = document.getElementById('stageIndicator');
+        
+        // Auto-run the demo
+        function runDemo() {
+            if (currentStage >= stages.length) {
+                currentStage = 0; // Restart from beginning
+            }
+            
+            // Update progress
+            progressBar.style.width = `${(currentStage + 1) * 33.33}%`;
+            stageIndicator.textContent = stages[currentStage].title;
+            
+            // Load current stage content
+            document.getElementById('sourceText').innerHTML = stages[currentStage].text;
+            document.getElementById('questionsContainer').innerHTML = '';
+            
+            // Animate words after a brief delay
+            setTimeout(animateWords, 1500);
+            
+            currentStage++;
+        }
+        
+        function animateWords() {
+            const words = document.querySelectorAll('.highlight');
+            const paperRect = document.querySelector('.question-paper').getBoundingClientRect();
+            
+            words.forEach((word, i) => {
+                const rect = word.getBoundingClientRect();
+                const wordClone = word.cloneNode(true);
+                wordClone.classList.add('animating');
+                
+                // Random effect and color
+                const effect = effects[Math.floor(Math.random() * effects.length)];
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                
+                wordClone.style.setProperty('--effect', effect);
+                wordClone.style.setProperty('--color', color);
+                wordClone.style.setProperty('--tx', `${paperRect.left + 50 - rect.left}px`);
+                wordClone.style.setProperty('--ty', `${paperRect.top + 100 + (i * 30) - rect.top}px`);
+                wordClone.style.left = `${rect.left}px`;
+                wordClone.style.top = `${rect.top}px`;
+                
+                document.body.appendChild(wordClone);
+                setTimeout(() => wordClone.remove(), 1200);
+            });
+            
+            // Show questions after animation
+            setTimeout(showQuestions, 1000);
+        }
+        
+        function showQuestions() {
+            const container = document.getElementById('questionsContainer');
+            const questions = stages[currentStage - 1].questions;
+            
+            questions.forEach((q, i) => {
+                setTimeout(() => {
+                    const questionEl = document.createElement('div');
+                    questionEl.className = 'question';
+                    questionEl.style.animationDelay = `${i * 0.2}s`;
+                    questionEl.innerHTML = `<p>${i+1}. ${q}</p>`;
+                    container.appendChild(questionEl);
+                }, i * 300);
+            });
+            
+            // Move to next stage after delay
+            setTimeout(runDemo, 5000);
+        }
+        
+        // Start the demo
+        runDemo();
+    </script>
+</body>
+</html>

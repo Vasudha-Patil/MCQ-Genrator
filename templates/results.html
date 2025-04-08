@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generated MCQs</title>
+    <style>
+        /* General body styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Container styling */
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Header styles */
+        h1 {
+            text-align: center;
+            color: #4b6cb7;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        /* MCQs display styling */
+        pre {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            margin-bottom: 20px;
+            color: #333333;
+        }
+
+        /* Buttons styling */
+        a {
+            display: inline-block;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 12px 20px;
+            border-radius: 5px;
+            margin: 10px 5px;
+        }
+
+        /* TXT and PDF buttons */
+        a[href^="/download"] {
+            background-color: #2196F3;
+            color: white;
+            border: none;
+        }
+
+        a[href^="/download"]:hover {
+            background-color: #0b7dda;
+        }
+
+        /* Go back button */
+        a[href="/"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+        }
+
+        a[href="/"]:hover {
+            background-color: #45a049;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            pre {
+                font-size: 0.9rem;
+            }
+
+            a {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Generated MCQs</h1>
+        <p>Here are the MCQs generated from the uploaded file:</p>
+        <pre>{{ mcqs }}</pre>
+
+        <h2>Download Generated MCQs:</h2>
+        <a href="/download/{{ txt_filename }}">Download as TXT</a>
+        <a href="/download/{{ pdf_filename }}">Download as PDF</a><br><br>
+
+        <a href="/">Go Back</a>
+    </div>
+
+</body>
+</html>
